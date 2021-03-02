@@ -120,7 +120,7 @@ ocp_qp_xcond_solver_dims *ocp_qp_xcond_solver_dims_assign(void *config_, int N, 
     dims->xcond_dims = config->xcond->dims_assign(config->xcond, N, c_ptr);
     c_ptr += config->xcond->dims_calculate_size(config->xcond, N);
 
-    assert((char *) raw_memory + ocp_qp_xcond_solver_dims_calculate_size(config_, N) == c_ptr);
+    // assert((char *) raw_memory + ocp_qp_xcond_solver_dims_calculate_size(config_, N) == c_ptr);
 
     return dims;
 }
@@ -183,17 +183,17 @@ void *ocp_qp_xcond_solver_opts_assign(void *config_, ocp_qp_xcond_solver_dims *d
     ocp_qp_xcond_solver_opts *opts = (ocp_qp_xcond_solver_opts *) c_ptr;
     c_ptr += sizeof(ocp_qp_xcond_solver_opts);
 
-    assert((size_t) c_ptr % 8 == 0 && "double not 8-byte aligned!");
+    // assert((size_t) c_ptr % 8 == 0 && "double not 8-byte aligned!");
 
     opts->xcond_opts = xcond->opts_assign(dims->xcond_dims, c_ptr);
     c_ptr += xcond->opts_calculate_size(dims->xcond_dims);
 
-    assert((size_t) c_ptr % 8 == 0 && "double not 8-byte aligned!");
+    // assert((size_t) c_ptr % 8 == 0 && "double not 8-byte aligned!");
 
     opts->qp_solver_opts = qp_solver->opts_assign(qp_solver, xcond_qp_dims, c_ptr);
     c_ptr += qp_solver->opts_calculate_size(qp_solver, xcond_qp_dims);
 
-    assert((char *) raw_memory + ocp_qp_xcond_solver_opts_calculate_size(config_, dims) == c_ptr);
+    // assert((char *) raw_memory + ocp_qp_xcond_solver_opts_calculate_size(config_, dims) == c_ptr);
 
     return (void *) opts;
 }
@@ -323,12 +323,12 @@ void *ocp_qp_xcond_solver_memory_assign(void *config_, ocp_qp_xcond_solver_dims 
     ocp_qp_xcond_solver_memory *mem = (ocp_qp_xcond_solver_memory *) c_ptr;
     c_ptr += sizeof(ocp_qp_xcond_solver_memory);
 
-    assert((size_t) c_ptr % 8 == 0 && "double not 8-byte aligned!");
+    // assert((size_t) c_ptr % 8 == 0 && "double not 8-byte aligned!");
 
     mem->xcond_memory = xcond->memory_assign(dims->xcond_dims, opts->xcond_opts, c_ptr);
     c_ptr += xcond->memory_calculate_size(dims->xcond_dims, opts->xcond_opts);
 
-    assert((size_t) c_ptr % 8 == 0 && "double not 8-byte aligned!");
+    // assert((size_t) c_ptr % 8 == 0 && "double not 8-byte aligned!");
 
     mem->solver_memory = qp_solver->memory_assign(qp_solver, xcond_qp_dims, opts->qp_solver_opts, c_ptr);
     c_ptr += qp_solver->memory_calculate_size(qp_solver, xcond_qp_dims, opts->qp_solver_opts);
@@ -336,7 +336,7 @@ void *ocp_qp_xcond_solver_memory_assign(void *config_, ocp_qp_xcond_solver_dims 
     xcond->memory_get(xcond, mem->xcond_memory, "xcond_qp_in", &mem->xcond_qp_in);
     xcond->memory_get(xcond, mem->xcond_memory, "xcond_qp_out", &mem->xcond_qp_out);
 
-    assert((char *) raw_memory + ocp_qp_xcond_solver_memory_calculate_size(config_, dims, opts_) >= c_ptr);
+    // assert((char *) raw_memory + ocp_qp_xcond_solver_memory_calculate_size(config_, dims, opts_) >= c_ptr);
 
     return mem;
 }
@@ -428,7 +428,7 @@ static void cast_workspace(void *config_, ocp_qp_xcond_solver_dims *dims,
     work->qp_solver_work = c_ptr;
     c_ptr += qp_solver->workspace_calculate_size(qp_solver, xcond_qp_dims, opts->qp_solver_opts);
 
-    assert((char *) work + config->workspace_calculate_size(config_, dims, opts) >= c_ptr);
+    // assert((char *) work + config->workspace_calculate_size(config_, dims, opts) >= c_ptr);
 }
 
 

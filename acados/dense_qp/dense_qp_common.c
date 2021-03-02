@@ -111,7 +111,7 @@ dense_qp_dims *dense_qp_dims_assign(void *raw_memory)
     d_dense_qp_dim_create(dims, c_ptr);
     c_ptr += d_dense_qp_dim_memsize();
 
-    assert((char *) raw_memory + dense_qp_dims_calculate_size() == c_ptr);
+    // assert((char *) raw_memory + dense_qp_dims_calculate_size() == c_ptr);
 
     return dims;
 }
@@ -152,7 +152,7 @@ dense_qp_in *dense_qp_in_assign(dense_qp_dims *dims, void *raw_memory)
     dense_qp_in *qp_in = (dense_qp_in *) c_ptr;
     c_ptr += sizeof(dense_qp_in);
 
-    assert((size_t) c_ptr % 8 == 0 && "memory not 8-byte aligned!");
+    // assert((size_t) c_ptr % 8 == 0 && "memory not 8-byte aligned!");
 
     d_dense_qp_create(dims, qp_in, c_ptr);
     c_ptr += d_dense_qp_memsize(dims);
@@ -168,7 +168,7 @@ dense_qp_in *dense_qp_in_assign(dense_qp_dims *dims, void *raw_memory)
     qp_in->dim->nsb = dims->nsb;
     qp_in->dim->nsg = dims->nsg;
 
-    assert((char *) raw_memory + dense_qp_in_calculate_size(dims) == c_ptr);
+    // assert((char *) raw_memory + dense_qp_in_calculate_size(dims) == c_ptr);
 
     return qp_in;
 }
@@ -206,7 +206,7 @@ dense_qp_out *dense_qp_out_assign(dense_qp_dims *dims, void *raw_memory)
     qp_out->misc = (void *) c_ptr;
     c_ptr += sizeof(qp_info);
 
-    assert((char *) raw_memory + dense_qp_out_calculate_size(dims) >= c_ptr);
+    // assert((char *) raw_memory + dense_qp_out_calculate_size(dims) >= c_ptr);
 
     return qp_out;
 }
@@ -256,7 +256,7 @@ dense_qp_res *dense_qp_res_assign(dense_qp_dims *dims, void *raw_memory)
     align_char_to(8, &c_ptr);
     d_dense_qp_res_create(dims, qp_res, c_ptr);
     c_ptr += d_dense_qp_res_memsize(dims);
-    assert((char *) raw_memory + dense_qp_res_calculate_size(dims) >= c_ptr);
+    // assert((char *) raw_memory + dense_qp_res_calculate_size(dims) >= c_ptr);
 
     return qp_res;
 }
@@ -287,7 +287,7 @@ dense_qp_res_ws *dense_qp_res_workspace_assign(dense_qp_dims *dims, void *raw_me
     d_dense_qp_res_ws_create(dims, res_ws, c_ptr);
     c_ptr += d_dense_qp_res_ws_memsize(dims);
 
-    assert((char *) raw_memory + dense_qp_res_workspace_calculate_size(dims) >= c_ptr);
+    // assert((char *) raw_memory + dense_qp_res_workspace_calculate_size(dims) >= c_ptr);
 
     return res_ws;
 }
@@ -401,9 +401,9 @@ void dense_qp_stack_slacks(dense_qp_in *in, dense_qp_in *out)
     int nb2 = out->dim->nb;
     int ng2 = out->dim->ng;
 
-    assert(nv2 == nv+2*ns && "Dimensions are wrong!");
-    assert(nb2 == nb-nsb+2*ns && "Dimensions are wrong!");
-    assert(ng2 == ng+nsb && "Dimensions are wrong!");
+    // assert(nv2 == nv+2*ns && "Dimensions are wrong!");
+    // assert(nb2 == nb-nsb+2*ns && "Dimensions are wrong!");
+    // assert(ng2 == ng+nsb && "Dimensions are wrong!");
 
     // set matrices to 0.0
     blasfeo_dgese(nv2, nv2, 0.0, out->Hv, 0, 0);
@@ -510,7 +510,7 @@ void dense_qp_stack_slacks(dense_qp_in *in, dense_qp_in *out)
             }
         }
 
-        assert(k_nsb == nb-nsb && "Dimensions are wrong!");
+        // assert(k_nsb == nb-nsb && "Dimensions are wrong!");
 
         // copy ls and us to out->lb, jump over nonsoftened box constraints
         blasfeo_dveccp(2*ns, in->d, 2*nb+2*ng, out->d, k_nsb);
@@ -560,9 +560,9 @@ void dense_qp_unstack_slacks(dense_qp_out *in, dense_qp_in *qp_out, dense_qp_out
     UNUSED(nsb);
     UNUSED(nv2);
 
-    assert(nv2 == nv+2*ns && "Dimensions are wrong!");
-    assert(nb2 == nb-nsb+2*ns && "Dimensions are wrong!");
-    assert(ng2 == 2*ng+2*nsb && "Dimensions are wrong!");
+    // assert(nv2 == nv+2*ns && "Dimensions are wrong!");
+    // assert(nb2 == nb-nsb+2*ns && "Dimensions are wrong!");
+    // assert(ng2 == 2*ng+2*nsb && "Dimensions are wrong!");
 
     // inequality constraints multipliers and slacks
     if (ns > 0)
@@ -571,7 +571,7 @@ void dense_qp_unstack_slacks(dense_qp_out *in, dense_qp_in *qp_out, dense_qp_out
         // set flags for non-softened box constraints
         // use out->v temporarily for this
         // XXX assume that nb<=nv
-        assert(nv+2*ns >= nb);
+        // assert(nv+2*ns >= nb);
 
         for (int ii = 0; ii < nb; ii++)
         {
@@ -636,7 +636,7 @@ void dense_qp_unstack_slacks(dense_qp_out *in, dense_qp_in *qp_out, dense_qp_out
             }
         }
 
-        assert(k_nsb == nb-nsb && "Dimensions are wrong!");
+        // assert(k_nsb == nb-nsb && "Dimensions are wrong!");
 
         blasfeo_dveccp(2*ns, in->t, k_nsb, out->t, 2*nb+2*ng);
         blasfeo_dveccp(ng, in->t, 2*nb2+ng2, out->t, 2*nb+ng);
