@@ -11,7 +11,7 @@ Other dSPACE platforms will probably require some adaptions of the workflow stat
 - you were able to generate S-Functions with acados, which also work in your Simulink simulation `'Simulation_Model_Name'.slx`.
 Thus, you have a folder `c_generated_code` with your S-Functions, a `make_sfun.m` Matlab script (and a `make_sfun_sim.m` script, if needed) and the corresponding C files.
 - you have prepared a Simulink model with the name `'dSPACE_Model_Name'.slx`, which does not contain the S-Functions yet and you were able to compile it for your dSPACE DS1202 (MicroLabBox) Platform.
-During the compilation process, the dSPACE Makefile `'dSPACE_Model_Name'_usr.mk` was created.
+During the compilation process, the dSPACE Makefile `'dSPACE_Model_Name'_usr.mk` was created, which can be found in the same directory as the dSpace Simulink model.
 
 ### Step 1: Adapt the existing CMake toolchain file for your system
 The CMake toolchain file, needed to cross-compile `acados` for the dSPACE DS1202 Platform contains paths to compilers, provided in the dSPACE installation.
@@ -92,11 +92,11 @@ For the example in the previous step the entry in the dSPACE Makefile would look
     ```
 3. Define the (relative) paths to the `acados` header files in the dSPACE Makefile. With hpipm as a solver, this looks as follows:
     ```
-      # Path names for user include files.
-      USER_INCLUDES_PATH = \
-      "include" \
-      "include\blasfeo\include" \
-      "include\hpipm\include"
+    # Path names for user include files.
+    USER_INCLUDES_PATH = \
+    "include" \
+    "include\blasfeo\include" \
+    "include\hpipm\include"
     ```
 4. Define the libraries needed to compile the S-Functions. With hpipm as a solver, this looks as follows:
     ```
