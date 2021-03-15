@@ -38,7 +38,7 @@
 #include <brtenv.h>
 #define printf(...)                               \
     msg_info_printf(MSG_SM_USER, 0, __VA_ARGS__); \
-//     ds1401_tic_delay(0.01);
+    // ds1401_tic_delay(0.01);
 #else
 #include <stdio.h>
 #endif

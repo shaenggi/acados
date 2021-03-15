@@ -30,7 +30,9 @@
  * ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
  * POSSIBILITY OF SUCH DAMAGE.;
  */
-
+#if defined(DSPACE_INCLUDES)
+#include <brtenv.h>
+#endif
 
 // external
 #include <stdlib.h>
@@ -86,6 +88,7 @@ void *ocp_qp_hpipm_opts_assign(void *config_, void *dims_, void *raw_memory)
 
     align_char_to(8, &c_ptr);
 #ifndef WINDOWS_SKIP_PTR_ALIGNMENT_CHECK
+    msg_info_printf(MSG_SM_USER, 10, "in ocp_qp_hpipm_opts_assign: c_ptr alignment: %zu\n", (size_t) c_ptr % 8);
     assert((size_t) c_ptr % 8 == 0 && "memory not 8-byte aligned!");
 #endif
 
@@ -185,6 +188,7 @@ void *ocp_qp_hpipm_memory_assign(void *config_, void *dims_, void *opts_, void *
 
     align_char_to(8, &c_ptr);
 #ifndef WINDOWS_SKIP_PTR_ALIGNMENT_CHECK
+    msg_info_printf(MSG_SM_USER, 10, "in ocp_qp_hpipm_opts_assign: c_ptr alignment: %zu\n", (size_t) c_ptr % 8);
     assert((size_t) c_ptr % 8 == 0 && "memory not 8-byte aligned!");
 #endif
     // ipm workspace structure

@@ -31,7 +31,9 @@
  * POSSIBILITY OF SUCH DAMAGE.;
  */
 
-
+#if defined(DSPACE_INCLUDES)
+#include <brtenv.h>
+#endif
 // external
 #include <assert.h>
 #include <stdio.h>
@@ -92,6 +94,7 @@ void *acados_calloc(size_t nitems, acados_size_t size)
 void assign_and_advance_double_ptrs(int n, double ***v, char **ptr)
 {
 #ifndef WINDOWS_SKIP_PTR_ALIGNMENT_CHECK
+    msg_info_printf(MSG_SM_USER, 10, "in assign_and_advance_double_ptrs: c_ptr alignment: %zu\n", (size_t) c_ptr % 8);
     assert((size_t) *ptr % 8 == 0 && "pointer not 8-byte aligned!");
 #endif
 #ifdef _USE_VALGRIND_
@@ -105,6 +108,7 @@ void assign_and_advance_double_ptrs(int n, double ***v, char **ptr)
 void assign_and_advance_int_ptrs(int n, int ***v, char **ptr)
 {
 #ifndef WINDOWS_SKIP_PTR_ALIGNMENT_CHECK
+    msg_info_printf(MSG_SM_USER, 10, "in assign_and_advance_int_ptrs: c_ptr alignment: %zu\n", (size_t) c_ptr % 8);
     assert((size_t) *ptr % 8 == 0 && "pointer not 8-byte aligned!");
 #endif
 #ifdef _USE_VALGRIND_
@@ -118,6 +122,7 @@ void assign_and_advance_int_ptrs(int n, int ***v, char **ptr)
 void assign_and_advance_blasfeo_dvec_structs(int n, struct blasfeo_dvec **sv, char **ptr)
 {
 #ifndef WINDOWS_SKIP_PTR_ALIGNMENT_CHECK
+    msg_info_printf(MSG_SM_USER, 10, "in assign_and_advance_blasfeo_dvec_structs: c_ptr alignment: %zu\n", (size_t) c_ptr % 8);
     assert((size_t) *ptr % 8 == 0 && "pointer not 8-byte aligned!");
 #endif
 #ifdef _USE_VALGRIND_
@@ -131,6 +136,7 @@ void assign_and_advance_blasfeo_dvec_structs(int n, struct blasfeo_dvec **sv, ch
 void assign_and_advance_blasfeo_dmat_structs(int n, struct blasfeo_dmat **sm, char **ptr)
 {
 #ifndef WINDOWS_SKIP_PTR_ALIGNMENT_CHECK
+    msg_info_printf(MSG_SM_USER, 10, "in assign_and_advance_blasfeo_dmat_structs: c_ptr alignment: %zu\n", (size_t) c_ptr % 8);
     assert((size_t) *ptr % 8 == 0 && "pointer not 8-byte aligned!");
 #endif
 #ifdef _USE_VALGRIND_
@@ -144,6 +150,7 @@ void assign_and_advance_blasfeo_dmat_structs(int n, struct blasfeo_dmat **sm, ch
 void assign_and_advance_blasfeo_dmat_ptrs(int n, struct blasfeo_dmat ***sm, char **ptr)
 {
 #ifndef WINDOWS_SKIP_PTR_ALIGNMENT_CHECK
+    msg_info_printf(MSG_SM_USER, 10, "in assign_and_advance_blasfeo_dmat_ptrs: c_ptr alignment: %zu\n", (size_t) c_ptr % 8);
     assert((size_t) *ptr % 8 == 0 && "pointer not 8-byte aligned!");
 #endif
 #ifdef _USE_VALGRIND_

@@ -31,6 +31,9 @@
  * POSSIBILITY OF SUCH DAMAGE.;
  */
 
+#if defined(DSPACE_INCLUDES)
+#include <brtenv.h>
+#endif
 
 #include "acados/ocp_nlp/ocp_nlp_common.h"
 
@@ -307,6 +310,7 @@ ocp_nlp_dims *ocp_nlp_dims_assign(void *config_, void *raw_memory)
 
     char *c_ptr = (char *) raw_memory;
 
+    msg_info_printf(MSG_SM_USER, 10, "ocp_nlp_dims_assign\n");
     // self
     ocp_nlp_dims *dims = ocp_nlp_dims_assign_self(N, c_ptr);
     c_ptr += ocp_nlp_dims_calculate_size_self(N);
