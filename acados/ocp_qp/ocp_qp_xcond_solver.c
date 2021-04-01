@@ -186,16 +186,16 @@ void *ocp_qp_xcond_solver_opts_assign(void *config_, ocp_qp_xcond_solver_dims *d
     c_ptr += sizeof(ocp_qp_xcond_solver_opts);
 
 #ifndef WINDOWS_SKIP_PTR_ALIGNMENT_CHECK
-    msg_info_printf(MSG_SM_USER, 10, "in ocp_qp_xcond_solver_opts_assign: c_ptr alignment: %zu\n", (size_t) c_ptr % 8);
-    assert((size_t) c_ptr % 8 == 0 && "memory not 8-byte aligned!");
+    msg_info_printf(MSG_SM_USER, 10, "in ocp_qp_xcond_solver_opts_assign: c_ptr alignment: %llu", (size_t) c_ptr % 8);
+//     assert((size_t) c_ptr % 8 == 0 && "memory not 8-byte aligned!");
 #endif
 
     opts->xcond_opts = xcond->opts_assign(dims->xcond_dims, c_ptr);
     c_ptr += xcond->opts_calculate_size(dims->xcond_dims);
 
 #ifndef WINDOWS_SKIP_PTR_ALIGNMENT_CHECK
-    msg_info_printf(MSG_SM_USER, 10, "in ocp_qp_xcond_solver_opts_assign: c_ptr alignment: %zu\n", (size_t) c_ptr % 8);
-    assert((size_t) c_ptr % 8 == 0 && "memory not 8-byte aligned!");
+    msg_info_printf(MSG_SM_USER, 10, "in ocp_qp_xcond_solver_opts_assign: c_ptr alignment: %llu", (size_t) c_ptr % 8);
+//     assert((size_t) c_ptr % 8 == 0 && "memory not 8-byte aligned!");
 #endif
 
     opts->qp_solver_opts = qp_solver->opts_assign(qp_solver, xcond_qp_dims, c_ptr);
@@ -332,16 +332,16 @@ void *ocp_qp_xcond_solver_memory_assign(void *config_, ocp_qp_xcond_solver_dims 
     c_ptr += sizeof(ocp_qp_xcond_solver_memory);
 
 #ifndef WINDOWS_SKIP_PTR_ALIGNMENT_CHECK
-    msg_info_printf(MSG_SM_USER, 10, "in ocp_qp_xcond_solver_memory_assign: c_ptr alignment: %zu\n", (size_t) c_ptr % 8);
-    assert((size_t) c_ptr % 8 == 0 && "memory not 8-byte aligned!");
+    msg_info_printf(MSG_SM_USER, 10, "in ocp_qp_xcond_solver_memory_assign: c_ptr alignment: %llu", (size_t) c_ptr % 8);
+//     assert((size_t) c_ptr % 8 == 0 && "memory not 8-byte aligned!");
 #endif
 
     mem->xcond_memory = xcond->memory_assign(dims->xcond_dims, opts->xcond_opts, c_ptr);
     c_ptr += xcond->memory_calculate_size(dims->xcond_dims, opts->xcond_opts);
 
 #ifndef WINDOWS_SKIP_PTR_ALIGNMENT_CHECK
-    msg_info_printf(MSG_SM_USER, 10, "in ocp_qp_xcond_solver_memory_assign: c_ptr alignment: %zu\n", (size_t) c_ptr % 8);
-    assert((size_t) c_ptr % 8 == 0 && "memory not 8-byte aligned!");
+    msg_info_printf(MSG_SM_USER, 10, "in ocp_qp_xcond_solver_memory_assign: c_ptr alignment: %llu", (size_t) c_ptr % 8);
+//     assert((size_t) c_ptr % 8 == 0 && "memory not 8-byte aligned!");
 #endif
 
     mem->solver_memory = qp_solver->memory_assign(qp_solver, xcond_qp_dims, opts->qp_solver_opts, c_ptr);

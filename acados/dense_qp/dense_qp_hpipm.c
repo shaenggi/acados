@@ -82,8 +82,8 @@ void *dense_qp_hpipm_opts_assign(void *config_, void *dims_, void *raw_memory)
     c_ptr += sizeof(struct d_dense_qp_ipm_arg);
 
 #ifndef WINDOWS_SKIP_PTR_ALIGNMENT_CHECK
-    msg_info_printf(MSG_SM_USER, 10, "in dense_qp_hpipm_opts_assign: c_ptr alignment: %zu\n", (size_t) c_ptr % 8);
-    assert((size_t) c_ptr % 8 == 0 && "memory not 8-byte aligned!");
+    msg_info_printf(MSG_SM_USER, 10, "in dense_qp_hpipm_opts_assign: c_ptr alignment: %llu", (size_t) c_ptr % 8);
+//     assert((size_t) c_ptr % 8 == 0 && "memory not 8-byte aligned!");
 #endif
 
     d_dense_qp_ipm_arg_create(dims, opts->hpipm_opts, c_ptr);
@@ -175,8 +175,8 @@ void *dense_qp_hpipm_memory_assign(void *config_, void *dims_, void *opts_, void
     struct d_dense_qp_ipm_ws *ipm_workspace = mem->hpipm_workspace;
 
 #ifndef WINDOWS_SKIP_PTR_ALIGNMENT_CHECK
-    msg_info_printf(MSG_SM_USER, 10, "in dense_qp_hpipm_memory_assign: c_ptr alignment: %zu\n", (size_t) c_ptr % 8);
-    assert((size_t) c_ptr % 8 == 0 && "memory not 8-byte aligned!");
+    msg_info_printf(MSG_SM_USER, 10, "in dense_qp_hpipm_memory_assign: c_ptr alignment: %llu", (size_t) c_ptr % 8);
+//     assert((size_t) c_ptr % 8 == 0 && "memory not 8-byte aligned!");
 #endif
 
     // ipm workspace structure
